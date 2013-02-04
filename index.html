@@ -29,6 +29,7 @@
                 color: #FFF;
                 font-family: monospace;
                 font-weight: normal;
+                padding-bottom: 1em;
             }
             #stereo * {
                 display: inline;
@@ -46,21 +47,25 @@
                 font-weight: bold;
                 line-height: inherit;
             }
+            strong {
+                font-size: 4em;
+                line-height: 0.25em;
+            }
         </style>
     </head>
     <body>
         <canvas id="canvas" width=1200" height="600"></canvas>
         <div id="content">
-            
             <div id="stereo">
-                <h1>FMS Symphony</h1>,
-                by <a rel="author" href="http://csvsoundsystem.com">csv soundsystem</a>.
+                <!-- This is a CSV -->
+                <h1>FMS Symphony</h1><strong>,</strong> by <a rel="author" href="http://csvsoundsystem.com">csv soundsystem</a><strong>,</strong>
                 <p>
-                    Chords are daily movements (high/major = $$$ in, low/minor = $$$ out). 
-                    Flourishes represent movements up and down (respectively) within a two month rolling window that are beyond 2.5 standard deviations from the mean.<br/>
-                    The left channel is distance to debt ceiling (higher notes = closer to the debt ceiling) and
-                    The right channel is interest rate. <br/>
-                    Chernoff faces mutate according to 15 principal components of 60 different categories of daily reciepts. (<a href="http://www.bdatafest.computationalreporting.com/projects/fms-symphony">Huh?</a>)
+                    Chords are daily movements (high/major = $$$ in, low/minor = $$$ out)<strong>,</strong>
+                    Flourishes represent movements up and down (respectively) within a two month rolling window that are beyond 2.5 standard deviations from the mean<strong>,</strong>
+                    The left channel is distance to debt ceiling (higher notes = closer to the debt ceiling) and the right channel is interest rate<strong>,</strong>
+                    Chernoff faces mutate according to 15 principal components of 60 different categories of daily reciepts<strong>,</strong>
+                    <a href="http://www.bdatafest.computationalreporting.com/projects/fms-symphony">Read more</a><strong>,</strong>
+                    <a href=",">Plot more</a>
                 </p>
             </div>
             <a rel="author" href="http://csvsoundsystem.com">
