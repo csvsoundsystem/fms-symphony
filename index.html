@@ -159,13 +159,18 @@
                     // Draw the image
                     context.drawImage(images[i], 0, 0)
 
-                    // Write the text
                     var fixie = document.getElementById('fixie')
                     var day = document.getElementById('day')
+
+                    // Write the text
                     fixie.innerHTML = dataFiles['date'][i]
                     fixie.href = dataFiles['url'][i]
+
+                    // Change the colors
                     day.style['color'] = bgOfDay[dataFiles['dayOfWeek'][i]]
-                    // fixie.style['background-color'] = bgOfDay[dataFiles['dayOfWeek'][i]]
+                    var col = context.getImageData(800, 590, 1, 1).data
+                    document.body.style['background-color'] = 'rgb(' + col[0] + ',' + col[1] + ',' + col[2] + ')'
+
 
                     // Clear
                     for (var j = 1; j < 20; j ++) {
