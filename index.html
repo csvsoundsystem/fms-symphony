@@ -86,6 +86,24 @@
         </div>
         <script src="data_files.js"></script>
         <script>
+            // Colors
+            var bgOfDay = {
+                Sunday: '#DDDDDD',
+                Monday: '#FFDDDD',
+                Tuesday: '#DDFFDD',
+                Wednesday: '#DDDDFF',
+                Thursday: '#DDFFFF',
+                Friday: '#FFFFDD',
+                Saturday: '#FFDDFF'
+            }
+            var fgOfDay = {
+                Monday: '#DDFFFF',
+                Tuesday: '#FFFFDD',
+                Wednesday: '#FFDDFF',
+                Thursday: '#FFDDDD',
+                Friday: '#DDFFDD'
+            }
+
             // Download images
             var n = 1877
             for (var i = n, rowNums = []; i--;) rowNums.push(i);
@@ -115,7 +133,7 @@
                 var progress = audio.currentTime / audio.duration
 
                 // Current image
-                var i = Math.round(1877 * progress)
+                var i = Math.floor(1877 * progress)
 
                 // Preload
                 for (var j = 0; j < 20; j ++) {
@@ -132,6 +150,8 @@
                 var fixie = document.getElementById('fixie')
                 fixie.innerHTML = dataFiles['date'][i]
                 fixie.href = dataFiles['url'][i]
+                fixie.style.color = fgOfDay[dataFiles['dayOfWeek'][i]]
+                // fixie.style['background-color'] = bgOfDay[dataFiles['dayOfWeek'][i]]
 
                 // Clear
                 for (var j = 1; j < 20; j ++) {
