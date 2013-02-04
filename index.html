@@ -6,32 +6,39 @@
             * {
                 margin: 0;
                 padding: 0;
+                font-family: monospace;
+                font-weight: normal;
             }
             #plot {
                 width: 100%;
             }
-            audio {
-                right: 0;
-                top: 0;
+            #canvas {
+                left: 0;
             }
-            #stereo, #csv, #canvas, #audio {
+            #fixie, #csv, #sticker, #audio {
                 position: absolute;
                 right: 0;
             }
-            #csv {
+            #audio {
+                top: 0;
+            }
+            #sticker {
                 top: 30px;
             }
-            #stereo {
+            #fixie {
+                top: 120px;
+                background-color: #000;
+                padding: 0.5em;
+            }
+            #csv {
                 text-align: left;
                 bottom: 0;
                 width: 100%;
                 background-color: #222;
                 color: #FFF;
-                font-family: monospace;
-                font-weight: normal;
                 padding-bottom: 1em;
             }
-            #stereo * {
+            #csv * {
                 display: inline;
             }
             a, a:visited, a:hover {
@@ -49,28 +56,29 @@
             }
             strong {
                 font-size: 4em;
-                line-height: 0.25em;
+                line-height: 0em;
             }
         </style>
     </head>
     <body>
         <canvas id="canvas" width=1200" height="600"></canvas>
         <div id="content">
-            <div id="stereo">
+            <div id="csv">
                 <!-- This is a CSV -->
-                <h1>FMS Symphony</h1><strong>,</strong> by <a rel="author" href="http://csvsoundsystem.com">csv soundsystem</a><strong>,</strong>
+                <h1>FMS Symphony</h1> <strong>,</strong> by <a rel="author" href="http://csvsoundsystem.com">csv soundsystem</a> <strong>,</strong>
                 <p>
-                    Chords are daily movements (high/major = $$$ in, low/minor = $$$ out)<strong>,</strong>
-                    Flourishes represent movements up and down (respectively) within a two month rolling window that are beyond 2.5 standard deviations from the mean<strong>,</strong>
-                    The left channel is distance to debt ceiling (higher notes = closer to the debt ceiling) and the right channel is interest rate<strong>,</strong>
-                    Chernoff faces mutate according to 15 principal components of 60 different categories of daily reciepts<strong>,</strong>
-                    <a href="http://www.bdatafest.computationalreporting.com/projects/fms-symphony">Read more</a><strong>,</strong>
+                    Chords are daily movements (high/major = $$$ in, low/minor = $$$ out) <strong>,</strong>
+                    Flourishes represent movements up and down (respectively) within a two month rolling window that are beyond 2.5 standard deviations from the mean <strong>,</strong>
+                    The left channel is distance to debt ceiling (higher notes = closer to the debt ceiling) and the right channel is interest rate <strong>,</strong>
+                    Chernoff faces mutate according to 15 principal components of 60 different categories of daily reciepts <strong>,</strong>
+                    <a href="http://www.bdatafest.computationalreporting.com/projects/fms-symphony">Read more</a> <strong>,</strong>
                     <a href=",">Plot more</a>
                 </p>
             </div>
             <a rel="author" href="http://csvsoundsystem.com">
-                <img id="csv" src="http://brianabelson.com/img/csvsoundsytem_short.png" alt="csv soundsystem">
+                <img id="sticker" src="csvsoundsytem.png" alt="csv soundsystem">
             </a>
+            <a id="fixie">Day month, year</a>
             <audio id="audio" controls autoplay style="display: block">
                 <source src="fms_soundsystem.mp3" type="audio/mp3" />
             </audio>
