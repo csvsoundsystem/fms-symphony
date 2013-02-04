@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="author" content="CSV Soundsystem">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            #plot {
+                width: 100%;
+            }
+            audio {
+                right: 0;
+                top: 0;
+            }
+            #marker {
+                width: 10px;
+                margin-left: -5px;
+                height: 100%;
+                opacity: 0.6;
+                background-color: #222;
+            }
+            #lights {
+                height: 100%;
+                width: 100%;
+                opacity: 0.2;
+            }
+            h1, #csv, #lights, #audio, #marker {
+                position: absolute;
+            }
+            #csv {
+                top: 30px;
+            }
+            h1 {
+                background-color: #222;
+                color: #0F0;
+                font-family: monospace;
+            }
+            a, a:visited, a:hover {
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="lights"></div>
+        <div id="content">
+            <div id="marker"></div>
+            <h1 id="title"><a href="http://www.bdatafest.computationalreporting.com/projects/fms-symphony">FMS Symphony</a></h1>
+            <a rel="author" href="http://csvsoundsystem.com">
+                <img id="csv" src="http://brianabelson.com/img/csvsoundsytem_short.png" alt="csv soundsystem">
+            </a>
+            <audio id="audio" controls autoplay style="display: block">
+                <source src="fms_soundsystem.mp3" type="audio/mp3" />
+            </audio>
+            <img id="plot" src="plot.png" alt="A line plot" />
+        </div>
+        <script>
+        audio.addEventListener('timeupdate', function() {
+            var progress = audio.currentTime / audio.duration
+
+            // Move the marker
+            var marker = document.getElementById('marker')
+            marker.style.left = (100 * progress) + '%'
+
+            // Lights to the beat (1874 rows/beats)
+            var i = Math.round((progress * 1874) % 4)
+            var lights = document.getElementById('lights')
+            var title = document.getElementById('title')
+            lights.style['background-color'] = ['#0F0', '#FF0', '#0FF', '#F0F'][i]
+            title.style.color = ['#F0F', '#00F', '#F00', '#0F0'][i]
+        }, false)
+    </script>
+    </body>
+</html>
