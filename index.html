@@ -178,7 +178,8 @@
                 audio.addEventListener('seeked', function() {
                     var progress = audio.currentTime / audio.duration
                     var i = Math.floor(1877 * progress) + 1
-                    piwikTracker.trackLink('#' + i, 'link');
+                    var url = [location.protocol, '//', location.host, location.pathname, '#', i].join('')
+                    piwikTracker.trackPageView(url)
                 }, false)
 
                 if (window.location.hash.length > 1) {
@@ -187,17 +188,19 @@
                 }
             }
         </script>
+
         <!-- Piwik --> 
         <script type="text/javascript">
-        var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.thomaslevine.com/" : "http://piwik.thomaslevine.com/");
-    document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
-        </script><script type="text/javascript">
-        try {
-        var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 14);
-        piwikTracker.trackPageView();
-        piwikTracker.enableLinkTracking();
-        } catch( err ) {}
-        </script><noscript><p><img src="http://piwik.thomaslevine.com/piwik.php?idsite=14" style="border:0" alt="" /></p></noscript>
+            var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.thomaslevine.com/" : "http://piwik.thomaslevine.com/");
+            document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+            </script><script type="text/javascript">
+            try {
+                var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 15);
+                piwikTracker.trackPageView();
+                piwikTracker.enableLinkTracking();
+            } catch( err ) {}
+        </script><noscript><p><img src="http://piwik.thomaslevine.com/piwik.php?idsite=15" style="border:0" alt="" /></p></noscript>
         <!-- End Piwik Tracking Code -->
+
     </body>
 </html>
