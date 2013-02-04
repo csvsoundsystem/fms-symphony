@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>All of the graphs!</title>
+	<style>
+	.viz-container{
+		width:100%;
+		margin-bottom:50px;
+	}
+	h1{
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light","Helvetica Neue", Helvetica,sans-serif;
+		font-weight: 300;
+		padding-top:20px;
+		border-top:3px solid black;
+	}
+	p,h3{
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light","Helvetica Neue", Helvetica,sans-serif;
+		font-weight: 300;
+	}
+	</style>
+</head>
+<body>
+	<h1></h1>
+	<div class="viz-container">
+		<p>Interestingly, you can see how government spending actually helps the stock market.</p>
+		<iframe src="total_withdrawal_net.html" frameborder="0" scrolling="no" width="100%" height="500"></iframe>
+	</div>
+
+	<div class="viz-container">
+		<h1>Debt ceiling in red, outstanding debt blue, mentions of "debt ceiling" on floor of congress</h1>
+		<p>You can see that in the past, the debt ceiling was passed without an issue. Last year,however, after much discussion the debt ceiling was not raised as much as it customarily had been in the past.</p>
+		<h3>This sonification plays notes in low to high as the country gets closer to the debt ceiling.</h3>
+		<embed height="50" width="100%" autostart="false" autoplay="false" src="debt_ceiling_final_up.mp3">
+		<iframe src="debt_ceiling_cap_words.html" frameborder="0" scrolling="no" width="100%" height="500"></iframe>
+	</div>
+	<div class="viz-container">
+		<iframe src="area-charts-table-2-deps.html" frameborder="0" scrolling="no" width="100%" height="1000"></iframe>
+	</div>
+
+	<div class="viz-container">
+		<h1>Medicare increases as percentage of total daily cash tax receipts</h1>
+		<img src="imgs/medicare.png"/>
+	</div>
+
+</body>
+</html>

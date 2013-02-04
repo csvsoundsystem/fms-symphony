@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Area Charts table 2 deposits</title>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	<script src="http://code.highcharts.com/stock/highstock.js"></script>
+
+	<script src='data/t2_cash_ftds_received_table_iv_deposits.js'></script>
+	<script src='data/t2_defense_finance_accounting_service_deposits.js'></script>
+	<script src='data/t2_education_department_programs_deposits.js'></script>
+	<script src='data/t2_energy_department_programs_deposits.js'></script>
+	<script src='data/t2_housing_and_urban_development_programs_deposits.js'></script>
+	<script src='data/t2_individual_income_and_employment_taxes_not_withheld_deposits.js'></script>
+	<script src='data/t2_postal_service_deposits.js'></script>
+	<script src='data/t2_public_debt_cash_issues_table_iii-b_deposits.js'></script>
+	<script src='data/t2_tarp_deposits.js'></script>
+	<script src='data/t2_unemployment_deposits.js'></script>
+	<style>
+		body{
+			font-family: "HelveticaNeue-Light", "Helvetica Neue Light","Helvetica Neue", Helvetica,sans-serif;
+			font-weight: 300;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<input class="chart-selector" type="radio" name="selector" value="0" checked> Cash FTDs received<br/>
+		<input class="chart-selector" type="radio" name="selector" value="1"> Defense financing accounting service<br/>
+		<input class="chart-selector" type="radio" name="selector" value="2"> Energy department programs<br/>
+		<input class="chart-selector" type="radio" name="selector" value="3"> Housing and urban development<br/>
+		<input class="chart-selector" type="radio" name="selector" value="4"> Individual Income and employment taxes<br/>
+		<input class="chart-selector" type="radio" name="selector" value="5"> Postal Service<br/>
+		<input class="chart-selector" type="radio" name="selector" value="6"> Public debt cash issue<br/>
+		<input class="chart-selector" type="radio" name="selector" value="7"> Tarp deposit<br/>
+		<input class="chart-selector" type="radio" name="selector" value="8"> Unemployment deposits<br/>
+	</div>
+
+	<div id="container" style="height: 500px"></div>
+
+<script>
+(function() {
+
+	// Convert times to unix time
+	// $.each(debt, function(key, value){
+	// });
+
+	var data_channels = [ftds, defense, ed, energy, hud, taxes, usps, debt, tarp, unemployment];
+
+	$.each(data_channels, function(key, value){
+		$.each(value, function(k, v){
+			var u_t = new Date(v[0]).getTime();
+			v[0] = u_t;
+		});
+	});
+
+	function drawChart(data_channel){
+	    var chart = new Highcharts.StockChart({
+			chart : {
+				renderTo : 'container'
+			},
+
+			rangeSelector : {
+				selected : 6
+			},
+
+			title : {
+				text : 'Deposits by major programs'
+			},
+
+			series : [
+			{
+				name : '',
+				data : data_channels[Number(data_channel)],
+				type : 'area',
+				threshold : null,
+				tooltip : {
+					valueDecimals : 2
+				},
+				fillColor : '#fc0',
+				color:'#F0AC00'
+			}]
+		});
+
+	}
+
+	drawChart(0);
+
+	$('.chart-selector').change(function(){
+		var selector = $(this).val();
+		drawChart(selector);
+	});
+
+
+}).call(this);
+
+</script>
+</body>
+</html>

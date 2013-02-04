@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>FMS SToof</title>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	<script src="http://code.highcharts.com/stock/highstock.js"></script>
+	<script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
+	<script src='data/ceiling_data.js'></script>
+
+
+	<style>
+		body{
+			font-family: "HelveticaNeue-Light", "Helvetica Neue Light","Helvetica Neue", Helvetica,sans-serif;
+			font-weight: 300;
+		}
+	</style>
+</head>
+<body>
+<!-- 	<div>
+		<input class="chart-selector" type="radio" name="selector" value="1" checked> Net<br/>
+		<input class="chart-selector" type="radio" name="selector" value="2"> Total deposits<br/>
+		<input class="chart-selector" type="radio" name="selector" value="3"> Total withdrawals<br/>
+	</div>
+ -->
+	<div id="container" style="height: 500px"></div>
+
+	<script>
+	(function(){
+		var data_statutory_debt = [];
+		var data_ceiling = [];
+
+		// Convert times to unix time
+		$.each(ceiling_data, function(key, value){
+			var u_t = new Date(value[0]).getTime();
+			value[0] = u_t;
+		});
+
+		// Make statutory debt data
+		$.each(ceiling_data, function(key, value){
+			data_statutory_debt.push([value[0],value[1]]);
+		})
+		// Make ceiling data
+		$.each(ceiling_data, function(key, value){
+			data_ceiling.push([value[0],value[2]]);
+		})
+
+
+
+		function drawChart(){
+			// create the chart
+			chart = new Highcharts.StockChart({
+			    chart: {
+			        renderTo: 'container',
+			        alignTicks: false
+			    },
+
+			    rangeSelector: {
+			        selected: 6
+			    },
+
+			    title: {
+			        text: 'Approaching the debt ceiling'
+			    },
+
+			    series: [{
+			        type: 'line',
+			        name: 'Debt ceiling',
+			        data: data_ceiling,
+			        dataGrouping: {
+						units: [[
+							'week', // unit name
+							[1]     // allowed multiples
+						], [
+							'month',
+							[1, 2, 3, 4, 6]
+						]]
+			        },
+			        color:'#FF0000',
+			        fillColor:'#0cf'
+			    },{
+			        type: 'line',
+			        name: 'Statutory debt',
+			        data: data_statutory_debt,
+			        dataGrouping: {
+						units: [[
+							'week', // unit name
+							[1]     // allowed multiples
+						], [
+							'month',
+							[1, 2, 3, 4, 6]
+						]]
+			        },
+			        color:'#0cf'
+			    }]
+			});
+
+		}
+
+
+		drawChart();
+
+		// $('.chart-selector').change(function(){
+		// 	var selector = $(this).val();
+		// 	pruneData(selector);
+		// 	drawChart();
+		// });
+
+	}).call(this);
+
+	</script>
+</body>
+</html>

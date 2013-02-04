@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Totals along with S&P</title>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	<script src="http://code.highcharts.com/stock/highstock.js"></script>
+	<script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
+	<script src='data/data.js'></script>
+	<script src='data/s_and_p.js'></script>
+
+
+	<style>
+		body{
+			font-family: "HelveticaNeue-Light", "Helvetica Neue Light","Helvetica Neue", Helvetica,sans-serif;
+			font-weight: 300;
+		}
+	</style>
+
+</head>
+<body>
+
+<script>
+(function() {
+
+		// Create the chart
+		window.chart = new Highcharts.StockChart({
+			chart : {
+				renderTo : 'container'
+			},
+
+			rangeSelector : {
+				selected : 1
+			},
+            yAxis: [{ // Primary yAxis
+                labels: {
+                    formatter: function() {
+                        return this.value +'°C';
+                    },
+                    style: {
+                        color: '#89A54E'
+                    }
+                },
+                title: {
+                    text: 'Temperature',
+                    style: {
+                        color: '#89A54E'
+                    }
+                },
+                opposite: true
+
+            }, { // Secondary yAxis
+                gridLineWidth: 0,
+                title: {
+                    text: 'Rainfall',
+                    style: {
+                        color: '#4572A7'
+                    }
+                },
+                labels: {
+                    formatter: function() {
+                        return this.value +' mm';
+                    },
+                    style: {
+                        color: '#4572A7'
+                    }
+                }
+
+            }],
+			title : {
+				text : 'AAPL Stock Price'
+			},
+
+			series : [{
+				name : 'AAPL',
+				data : data,
+                yAxis: 1,
+                type: 'line',
+				tooltip: {
+					valueDecimals: 2
+				}
+			},{
+                name: 'Rainfall',
+                yAxis: 0,
+                type: 'line',
+                data: s_and_p,
+				tooltip: {
+					valueDecimals: 2
+				}
+
+            }]
+		});
+}).call(this);
+
+
+</script>
+</body>
+</html>

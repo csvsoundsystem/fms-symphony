@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="author" content="CSV Soundsystem">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            #plot {
+                width: 100%;
+            }
+            audio {
+                right: 0;
+                top: 0;
+            }
+            #stereo, #csv, #canvas, #audio {
+                position: absolute;
+                right: 0;
+            }
+            #csv {
+                top: 30px;
+            }
+            #stereo {
+                text-align: left;
+                bottom: 0;
+                width: 100%;
+                background-color: #222;
+                color: #FFF;
+                font-family: monospace;
+                font-weight: normal;
+            }
+            #stereo * {
+                display: inline;
+            }
+            a, a:visited, a:hover {
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a {
+                text-decoration: underline;
+            }
+            h1 {
+                color: inherit;
+                font-size: inherit;
+                font-weight: bold;
+                line-height: inherit;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="canvas" width=1200" height="600"></canvas>
+        <div id="content">
+            
+            <div id="stereo">
+                <h1>FMS Symphony</h1>,
+                by <a rel="author" href="http://csvsoundsystem.com">csv soundsystem</a>.
+                <p>
+                    Chords are daily movements (high/major = $$$ in, low/minor = $$$ out). 
+                    Flourishes represent movements up and down (respectively) within a two month rolling window that are beyond 2.5 standard deviations from the mean.<br/>
+                    The left channel is distance to debt ceiling (higher notes = closer to the debt ceiling) and
+                    The right channel is interest rate. <br/>
+                    Chernoff faces mutate according to 15 principal components of 60 different categories of daily reciepts. (<a href="http://www.bdatafest.computationalreporting.com/projects/fms-symphony">Huh?</a>)
+                </p>
+            </div>
+            <a rel="author" href="http://csvsoundsystem.com">
+                <img id="csv" src="http://brianabelson.com/img/csvsoundsytem_short.png" alt="csv soundsystem">
+            </a>
+            <audio id="audio" controls autoplay style="display: block">
+                <source src="fms_soundsystem.mp3" type="audio/mp3" />
+            </audio>
+        </div>
+        <script>
+            // Download images
+            var n = 1877
+            for (var i = n, rowNums = []; i--;) rowNums.push(i);
+            rowNums.pop()
+            rowNums.reverse()
+          //var images = rowNums.map(function(i) {
+          //    var img = new Image()
+          //    img.src = 'slideshow/' + i + '.png'
+          //    return img
+          //})
+            var images = rowNums.map(function(i) { return(null) })
+
+            // Preload
+            for (var i = 1; i < 100; i ++) {
+                images[i] = new Image()
+                images[i].src = 'slideshow/' + (i) + '.png'
+            }
+
+            // Swap images
+            audio.addEventListener('timeupdate', function() {
+                // Canvas
+                var canvas = document.getElementById('canvas')
+                var context = canvas.getContext('2d')
+
+                // Audio
+                var audio = document.getElementById('audio')
+                var progress = audio.currentTime / audio.duration
+
+                // Current image
+                var i = Math.round(1877 * progress)
+
+                // Preload
+                for (var j = 0; j < 20; j ++) {
+                    if (images[i + j] == null) {
+                        images[i + j] = new Image()
+                        images[i + j].src = 'slideshow/' + (i + j) + '.png'
+                    }
+                }
+
+                // Draw the image
+                context.drawImage(images[i], 0, 0)
+
+                // Clear
+                for (var j = 1; j < 20; j ++) {
+                    if (i - j < 1) {
+                        continue
+                    }
+                    images[i - j] = null
+                }
+            }, false)
+        </script>
+    </body>
+</html>
