@@ -83,7 +83,7 @@
             </a>
             <div id="day">
                 <h1>FMS Symphony</h1>
-                <a id="fixie"></a>
+                <a id="fixie" target="_blank"></a>
             </div>
             <audio id="audio" controls autoplay style="display: block">
                 <source src="fms_symphony.mp3" type="audio/mp3" />
@@ -127,49 +127,61 @@
                 images[i].src = 'slideshow/' + (i) + '.png'
             }
 
-            // Swap images
-            audio.addEventListener('timeupdate', function() {
-                // Canvas
-                var canvas = document.getElementById('canvas')
-                var context = canvas.getContext('2d')
-
-                // Audio
+            window.onload = function() {
+                // Swap images
                 var audio = document.getElementById('audio')
-                var progress = audio.currentTime / audio.duration
+                audio.addEventListener('timeupdate', function() {
+                    // Canvas
+                    var canvas = document.getElementById('canvas')
+                    var context = canvas.getContext('2d')
 
-                // Current image
-                var i = Math.floor(1877 * progress) + 1
+                    // Audio
+                    var progress = audio.currentTime / audio.duration
 
-                // Preload
-                for (var j = 0; j < 20; j ++) {
-                    if (i + j >= 1877) {
-                        continue
+                    // Current image
+                    var i = Math.floor(1877 * progress) + 1
+
+                    // Preload
+                    for (var j = 0; j < 20; j ++) {
+                        if (i + j >= 1877) {
+                            continue
+                        }
+                        if (images[i + j] == null) {
+                            images[i + j] = new Image()
+                            images[i + j].src = 'slideshow/' + (i + j) + '.png'
+                        }
                     }
-                    if (images[i + j] == null) {
-                        images[i + j] = new Image()
-                        images[i + j].src = 'slideshow/' + (i + j) + '.png'
+
+                    // Draw the image
+                    context.drawImage(images[i], 0, 0)
+
+                    // Write the text
+                    var fixie = document.getElementById('fixie')
+                    var day = document.getElementById('day')
+                    fixie.innerHTML = dataFiles['date'][i]
+                    fixie.href = dataFiles['url'][i]
+                    day.style['color'] = bgOfDay[dataFiles['dayOfWeek'][i]]
+                    // fixie.style['background-color'] = bgOfDay[dataFiles['dayOfWeek'][i]]
+
+                    // Clear
+                    for (var j = 1; j < 20; j ++) {
+                        if (i - j < 1) {
+                            continue
+                        }
+                        images[i - j] = null
                     }
+                }, false)
+                audio.addEventListener('seeked', function() {
+                    var progress = audio.currentTime / audio.duration
+                    var i = Math.floor(1877 * progress) + 1
+                    piwikTracker.trackLink('#' + i, 'link');
+                }, false)
+
+                if (window.location.hash.length > 1) {
+                    var specifiedFrame = window.location.hash.replace('#', '') * 1
+                    audio.currentTime = audio.duration * specifiedFrame / 1877
                 }
-
-                // Draw the image
-                context.drawImage(images[i], 0, 0)
-
-                // Write the text
-                var fixie = document.getElementById('fixie')
-                var day = document.getElementById('day')
-                fixie.innerHTML = dataFiles['date'][i]
-                fixie.href = dataFiles['url'][i]
-                day.style['color'] = bgOfDay[dataFiles['dayOfWeek'][i]]
-                // fixie.style['background-color'] = bgOfDay[dataFiles['dayOfWeek'][i]]
-
-                // Clear
-                for (var j = 1; j < 20; j ++) {
-                    if (i - j < 1) {
-                        continue
-                    }
-                    images[i - j] = null
-                }
-            }, false)
+            }
         </script>
         <!-- Piwik --> 
         <script type="text/javascript">
