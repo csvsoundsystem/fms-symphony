@@ -140,6 +140,10 @@
 
                     // Current image
                     var i = Math.floor(1877 * progress) + 1
+                    if (i >= 1877) {
+                        return
+                    }
+                    window.location.hash = '#' + i
 
                     // Preload
                     for (var j = 0; j < 20; j ++) {
