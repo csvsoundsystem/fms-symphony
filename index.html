@@ -8,6 +8,7 @@
                 padding: 0;
                 font-family: monospace;
                 font-weight: normal;
+                color: #FFF;
             }
             #plot {
                 width: 100%;
@@ -35,7 +36,6 @@
                 bottom: 0;
                 width: 100%;
                 background-color: #222;
-                color: #FFF;
                 padding-bottom: 1em;
             }
             #csv * {
@@ -72,7 +72,8 @@
                     The left channel is distance to debt ceiling (higher notes = closer to the debt ceiling) and the right channel is interest rate <strong>,</strong>
                     Chernoff faces mutate according to 15 principal components of 60 different categories of daily reciepts <strong>,</strong>
                     <a href="http://www.bdatafest.computationalreporting.com/projects/fms-symphony">Read more</a> <strong>,</strong>
-                    <a href=",">Plot more</a>
+                    <a href=",">Plot more</a> <strong>,</strong>
+                    <a href="https://github.com/csvsoundsystem/fms-symphony.git">Edit</a>
                 </p>
             </div>
             <a rel="author" href="http://csvsoundsystem.com">
@@ -83,6 +84,7 @@
                 <source src="fms_soundsystem.mp3" type="audio/mp3" />
             </audio>
         </div>
+        <script src="data_files.js"></script>
         <script>
             // Download images
             var n = 1877
@@ -125,6 +127,11 @@
 
                 // Draw the image
                 context.drawImage(images[i], 0, 0)
+
+                // Write the text
+                var fixie = document.getElementById('fixie')
+                fixie.innerHTML = dataFiles['date'][i]
+                fixie.href = dataFiles['url'][i]
 
                 // Clear
                 for (var j = 1; j < 20; j ++) {
