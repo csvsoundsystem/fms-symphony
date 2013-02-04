@@ -137,7 +137,7 @@
                 var progress = audio.currentTime / audio.duration
 
                 // Current image
-                var i = Math.ceil(1877 * progress)
+                var i = Math.floor(1877 * progress) + 1
 
                 // Preload
                 for (var j = 0; j < 20; j ++) {
