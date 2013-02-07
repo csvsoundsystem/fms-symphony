@@ -115,8 +115,8 @@
             var n = 1877
             for (var i = n, images = []; i--;) images.push(null);
 
-            // Preload
-            for (var i = 1; i < 100; i ++) {
+            // Load a few when the page loads.
+            for (var i = 1; i < 5; i ++) {
                 images[i] = new Image()
                 images[i].src = 'slideshow/' + (i) + '.png'
             }
@@ -139,8 +139,8 @@
                     }
                     window.location.hash = '#' + i
 
-                    // Preload
-                    for (var j = 0; j < 5; j ++) {
+                    // Look a few images ahead.
+                    for (var j = 0; j < 100; j ++) {
                         if (i + j >= 1877) {
                             break
                         }
