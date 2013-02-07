@@ -140,9 +140,9 @@
                     window.location.hash = '#' + i
 
                     // Preload
-                    for (var j = 0; j < 20; j ++) {
+                    for (var j = 0; j < 5; j ++) {
                         if (i + j >= 1877) {
-                            continue
+                            break
                         }
                         if (images[i + j] == null) {
                             images[i + j] = new Image()
@@ -165,9 +165,9 @@
                     document.body.setAttribute('class', dataFiles['dayOfWeek'][i - 1].toLowerCase())
 
                     // Clear
-                    for (var j = 1; j < 20; j ++) {
+                    for (var j = 1; j < 1900; j ++) {
                         if (i - j < 1) {
-                            continue
+                            break  
                         }
                         images[i - j] = null
                     }
