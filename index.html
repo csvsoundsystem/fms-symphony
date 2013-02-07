@@ -111,15 +111,7 @@
 
             // Download images
             var n = 1877
-            for (var i = n, rowNums = []; i--;) rowNums.push(i);
-            rowNums.pop()
-            rowNums.reverse()
-          //var images = rowNums.map(function(i) {
-          //    var img = new Image()
-          //    img.src = 'slideshow/' + i + '.png'
-          //    return img
-          //})
-            var images = rowNums.map(function(i) { return(null) })
+            for (var i = n, images = []; i--;) images.push(null);
 
             // Preload
             for (var i = 1; i < 100; i ++) {
