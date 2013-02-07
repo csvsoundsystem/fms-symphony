@@ -59,6 +59,16 @@
                 font-size: 4em;
                 line-height: 0em;
             }
+            .fg-monday { color: #00DDDD; }
+            .fg-tuesday { color: #DDDD00; }
+            .fg-wednesday { color: #DD00DD; }
+            .fg-thursday { color: #DD0000; }
+            .fg-friday { color: #00DD00; }
+            .bg-monday { background-color: #FFDDDD; }
+            .bg-tuesday { background-color: #DDFFDD; }
+            .bg-wednesday { background-color: #DDDDFF; }
+            .bg-thursday { background-color: #DDFFFF; }
+            .bg-friday { background-color: #FFFFDD; }
         </style>
     </head>
     <body>
@@ -91,24 +101,6 @@
         </div>
         <script type="text/javascript" src="data_files.js"></script>
         <script>
-            // Colors
-            var fgOfDay = {
-                Sunday: '#000000',
-                Monday: '#00DDDD',
-                Tuesday: '#DDDD00',
-                Wednesday: '#DD00DD',
-                Thursday: '#DD0000',
-                Friday: '#00DD00',
-                Saturday: '#0000DD'
-            }
-            var bgOfDay = {
-                Monday: '#0FF',
-                Tuesday: '#FF0',
-                Wednesday: '#F0F',
-                Thursday: '#F00',
-                Friday: '#0F0'
-            }
-
             // Download images
             var n = 1877
             for (var i = n, images = []; i--;) images.push(null);
@@ -159,9 +151,9 @@
                     fixie.href = dataFiles['url'][i]
 
                     // Change the colors
-                    day.style['color'] = bgOfDay[dataFiles['dayOfWeek'][i]]
-                    var col = context.getImageData(800, 590, 1, 1).data
-                    document.body.style['background-color'] = 'rgb(' + col[0] + ',' + col[1] + ',' + col[2] + ')'
+                    day.setAttribute('class', 'fg-' + dataFiles['dayOfWeek'][i - 1].toLowerCase())
+                    console.log(day)
+                    document.body.setAttribute('class', 'bg-' + dataFiles['dayOfWeek'][i - 1].toLowerCase())
 
                     // Clear
                     for (var j = 1; j < 20; j ++) {
