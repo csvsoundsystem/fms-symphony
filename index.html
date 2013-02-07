@@ -59,16 +59,21 @@
                 font-size: 4em;
                 line-height: 0em;
             }
-            .fg-monday { color: #00DDDD; }
-            .fg-tuesday { color: #DDDD00; }
-            .fg-wednesday { color: #DD00DD; }
-            .fg-thursday { color: #DD0000; }
-            .fg-friday { color: #00DD00; }
-            .bg-monday { background-color: #FFDDDD; }
-            .bg-tuesday { background-color: #DDFFDD; }
-            .bg-wednesday { background-color: #DDDDFF; }
-            .bg-thursday { background-color: #DDFFFF; }
-            .bg-friday { background-color: #FFFFDD; }
+            .legend-monday, .monday .fg { color: #00DDDD; }
+            .legend-tuesday, .tuesday .fg { color: #DDDD00; }
+            .legend-wednesday, .wednesday .fg { color: #DD00DD; }
+            .legend-thursday, .thursday .fg { color: #DD0000; }
+            .legend-friday, .friday .fg { color: #00DD00; }
+            .monday { background-color: #FFDDDD; }
+            .tuesday { background-color: #DDFFDD; }
+            .wednesday { background-color: #DDDDFF; }
+            .thursday { background-color: #DDFFFF; }
+            .friday { background-color: #FFFFDD; }
+            .monday .legend-monday { border-bottom: 1px solid #FFDDDD; }
+            .tuesday .legend-tuesday { border-bottom: 1px solid #DDFFDD; }
+            .wednesday .legend-wednesday { border-bottom: 1px solid #DDDDFF; }
+            .thursday .legend-thursday { border-bottom: 1px solid #DDFFFF; }
+            .friday .legend-friday { border-bottom: 1px solid #FFFFDD; }
         </style>
     </head>
     <body>
@@ -81,7 +86,12 @@
                     <strong>,</strong>Chords are daily movements (high/major = $$$ in, low/minor = $$$ out)
                     <strong>,</strong>Flourishes represent movements up and down (respectively) within a two month rolling window that are beyond 2.5 standard deviations from the mean
                     <strong>,</strong>The left channel is distance to debt ceiling (higher notes = closer to the debt ceiling) and the right channel is interest rate
-                    <strong>,</strong>Chernoff faces mutate according to 15 principal components of 60 different categories of daily reciepts
+                    <strong>,</strong>Chernoff faces mutate according to 15 principal components of 52 different categories of daily reciepts
+                    <strong>,</strong><span class="legend-monday">Monday</span>
+                        <span class="legend-tuesday">Tuesday</span>
+                        <span class="legend-wednesday">Wednesday</span>
+                        <span class="legend-thursday">Thursday</span>
+                        <span class="legend-friday">Friday</span>
                     <strong>,</strong><a target="_blank" href="http://www.bdatafest.computationalreporting.com/projects/fms-symphony">Read more</a>
                     <strong>,</strong><a target="_blank" href=",">Plot more</a>
                     <strong>,</strong><a target="_blank" href="https://github.com/csvsoundsystem/fms-symphony.git">Edit</a>
@@ -91,7 +101,7 @@
             <a rel="author" target="_blank" href="http://csvsoundsystem.com">
                 <img id="sticker" src="csvsoundsytem.png" alt="csv soundsystem">
             </a>
-            <div id="day">
+            <div id="day" class="fg">
                 <h1>FMS Symphony</h1>
                 <a id="fixie" target="_blank"></a>
             </div>
@@ -151,9 +161,7 @@
                     fixie.href = dataFiles['url'][i]
 
                     // Change the colors
-                    day.setAttribute('class', 'fg-' + dataFiles['dayOfWeek'][i - 1].toLowerCase())
-                    console.log(day)
-                    document.body.setAttribute('class', 'bg-' + dataFiles['dayOfWeek'][i - 1].toLowerCase())
+                    document.body.setAttribute('class', dataFiles['dayOfWeek'][i - 1].toLowerCase())
 
                     // Clear
                     for (var j = 1; j < 20; j ++) {
