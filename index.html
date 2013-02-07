@@ -156,9 +156,10 @@
                     var fixie = document.getElementById('fixie')
                     var day = document.getElementById('day')
 
+
                     // Write the text
-                    fixie.innerHTML = dataFiles['date'][i]
-                    fixie.href = dataFiles['url'][i]
+                    fixie.innerHTML = dataFiles['date'][i - 1]
+                    fixie.href = dataFiles['url'][i - 1]
 
                     // Change the colors
                     document.body.setAttribute('class', dataFiles['dayOfWeek'][i - 1].toLowerCase())
