@@ -119,17 +119,6 @@
 
             // Buffer on a seek or a page load.
             var bufferSize = 100
-            var buffer = function(iStart) {
-                for (var i = iStart; i < bufferSize; i ++) {
-                    if (i >= n) {
-                        break
-                    }
-                    if (images[i] == null) {
-                        images[i] = new Image()
-                        images[i].src = 'slideshow/' + i + '.png'
-                    }
-                }
-            }
 
             window.onload = function() {
                 // Swap images
@@ -148,24 +137,24 @@
                         return
                     }
 
-                    // Start buffering
-                    buffer(i)
 
                     // Set the hash.
                     window.location.hash = '#' + i
 
                     // If the image has been loaded, draw it.
                     // Draw nothing if it has not been loaded.
-                    window.i = images[i]
                     if (images[i]) {
                         context.drawImage(images[i], 0, 0)
                     }
 
                     // Start downloading another image.
-                    if (i + bufferSize < n) {
-                        if (images[i + bufferSize] == null) {
-                            images[i + bufferSize] = new Image()
-                            images[i + bufferSize].src = 'slideshow/' + (i + bufferSize) + '.png'
+                    for (var j = i; j < i + bufferSize; j++) {
+                        if (j > n) {
+                            break
+                        }
+                        if (images[j] == null) {
+                            images[j] = new Image()
+                            images[j].src = 'slideshow/' + j + '.png'
                         }
                     }
 
@@ -180,14 +169,11 @@
                     // Change the colors
                     document.body.setAttribute('class', dataFiles['dayOfWeek'][i - 1].toLowerCase())
 
-                    // Clear, starting 6 frames back.
-                    for (var j = 6; j < n; j ++) {
+                    // Clear, starting 10 frames back.
+                    for (var j = 10; j < n; j ++) {
                         if (i - j < 1) {
                             // Stop when we hit 1.
                             break  
-                        } else if (!images[i - j]) {
-                            // Stop if we hit an image we've already cleared.
-                            break
                         }
                         images[i - j] = null
                     }
@@ -195,9 +181,6 @@
                 audio.addEventListener('seeked', function() {
                     var progress = audio.currentTime / audio.duration
                     var i = Math.floor(n * progress) + 1
-
-                    // Start buffering.
-                    buffer(i)
 
                     // Set hash.
                     var url = [location.protocol, '//', location.host, location.pathname, '#', i].join('')
