@@ -121,7 +121,7 @@
             var bufferSize = 100
             var buffer = function(iStart) {
                 for (var i = iStart; i < bufferSize; i ++) {
-                    if (i >= 1877) {
+                    if (i >= n) {
                         break
                     }
                     if (images[i] == null) {
@@ -143,8 +143,8 @@
                     var progress = audio.currentTime / audio.duration
 
                     // Current image
-                    var i = Math.floor(1877 * progress) + 1
-                    if (i >= 1877) {
+                    var i = Math.floor(n * progress) + 1
+                    if (i >= n) {
                         return
                     }
 
@@ -162,7 +162,7 @@
                     }
 
                     // Start downloading another image.
-                    if (i + bufferSize < 1877) {
+                    if (i + bufferSize < n) {
                         if (images[i + bufferSize] == null) {
                             images[i + bufferSize] = new Image()
                             images[i + bufferSize].src = 'slideshow/' + (i + bufferSize) + '.png'
@@ -181,7 +181,7 @@
                     document.body.setAttribute('class', dataFiles['dayOfWeek'][i - 1].toLowerCase())
 
                     // Clear, starting 6 frames back.
-                    for (var j = 6; j < 1900; j ++) {
+                    for (var j = 6; j < n; j ++) {
                         if (i - j < 1) {
                             // Stop when we hit 1.
                             break  
@@ -194,7 +194,7 @@
                 }, false)
                 audio.addEventListener('seeked', function() {
                     var progress = audio.currentTime / audio.duration
-                    var i = Math.floor(1877 * progress) + 1
+                    var i = Math.floor(n * progress) + 1
 
                     // Start buffering.
                     buffer(i)
@@ -210,7 +210,7 @@
 
                 if (window.location.hash.length > 1) {
                     var specifiedFrame = window.location.hash.replace('#', '') * 1
-                    audio.currentTime = audio.duration * specifiedFrame / 1877
+                    audio.currentTime = audio.duration * specifiedFrame / n
                 }
             }
         </script>
