@@ -115,12 +115,6 @@
             var n = 1877
             for (var i = n, images = []; i--;) images.push(null);
 
-            // Load a few when the page loads.
-            for (var i = 1; i < 5; i ++) {
-                images[i] = new Image()
-                images[i].src = 'slideshow/' + (i) + '.png'
-            }
-
             window.onload = function() {
                 // Swap images
                 var audio = document.getElementById('audio')
@@ -137,7 +131,16 @@
                     if (i >= 1877) {
                         return
                     }
+
+                    // Set the hash.
                     window.location.hash = '#' + i
+
+                    // If the image has been loaded, draw it.
+                    // Draw nothing if it has not been loaded.
+                    window.i = images[i]
+                    if (images[i]) {
+                        context.drawImage(images[i], 0, 0)
+                    }
 
                     // Look a few images ahead.
                     for (var j = 0; j < 100; j ++) {
@@ -150,9 +153,6 @@
                         }
                     }
 
-                    // Draw the image
-                    context.drawImage(images[i], 0, 0)
-
                     var fixie = document.getElementById('fixie')
                     var day = document.getElementById('day')
 
@@ -164,10 +164,14 @@
                     // Change the colors
                     document.body.setAttribute('class', dataFiles['dayOfWeek'][i - 1].toLowerCase())
 
-                    // Clear
-                    for (var j = 1; j < 1900; j ++) {
+                    // Clear, starting 6 frames back.
+                    for (var j = 6; j < 1900; j ++) {
                         if (i - j < 1) {
+                            // Stop when we hit 1.
                             break  
+                        } else if (!images[i - j]) {
+                            // Stop if we hit an image we've already cleared.
+                            break
                         }
                         images[i - j] = null
                     }
@@ -176,7 +180,9 @@
                     var progress = audio.currentTime / audio.duration
                     var i = Math.floor(1877 * progress) + 1
                     var url = [location.protocol, '//', location.host, location.pathname, '#', i].join('')
-                    piwikTracker.trackPageView(url)
+                    if (piwikTracker) {
+                        piwikTracker.trackPageView(url)
+                    }
                 }, false)
 
                 if (window.location.hash.length > 1) {
