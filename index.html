@@ -95,6 +95,7 @@
                     <strong>,</strong><a target="_blank" href=",">Plot more</a>
                     <strong>,</strong><a target="_blank" href="https://github.com/csvsoundsystem/fms-symphony.git">Edit</a>
                     <strong>,</strong><a target="_blank" href="fms_symphony.mp3">Download</a>
+                    <strong>,</strong><a id="financial-crisis" href="#777">Financial crisis</a>
                     <strong>,</strong><a target="_blank" href="http://www.bdatafest.computationalreporting.com/projects/fms-symphony">Huh?</a>
                 </p>
             </div>
@@ -191,6 +192,14 @@
                         piwikTracker.trackPageView(url)
                     }
                 }, false)
+
+                document.getElementById('financial-crisis').addEventListener('click', function(e) {
+                  e.preventDefault()
+                  audio.pause()
+                  audio.currentTime = audio.duration * ((777 - 2) / 1873)
+                  audio.play()
+                  return false
+                })
 
                 if (window.location.hash.length > 1) {
                     var specifiedFrame = window.location.hash.replace('#', '') * 1
