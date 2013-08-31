@@ -106,6 +106,7 @@
                 <a id="fixie" target="_blank"></a>
             </div>
             <audio id="audio" controls autoplay style="display: block">
+                <source src="fms_symphony.ogg" type="audio/ogg" />
                 <source src="fms_symphony.mp3" type="audio/mp3" />
             </audio>
         </div>
@@ -178,7 +179,7 @@
                         images[i - j] = null
                     }
                 }, false)
-                audio.addEventListener('seeked', function() {
+                audio.addEventListener('timeupdate', function() {
                     var progress = audio.currentTime / audio.duration
                     var i = Math.floor(n * progress) + 1
 
